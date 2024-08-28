@@ -168,7 +168,8 @@ private fun FlipCardFront(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Spacer(Modifier.height(103.dp))
+            // Place Space at the top and bottom of the card in a 17 to 13 ratio.
+            Spacer(Modifier.weight(17/30f))
             Image(
                 bitmap = profileImage,
                 contentDescription = null,
@@ -196,6 +197,8 @@ private fun FlipCardFront(
                 style = MaterialTheme.typography.headlineSmall,
                 maxLines = 1,
             )
+            // Place Space at the top and bottom of the card in a 17 to 13 ratio.
+            Spacer(Modifier.weight(13/30f))
         }
     }
 }
