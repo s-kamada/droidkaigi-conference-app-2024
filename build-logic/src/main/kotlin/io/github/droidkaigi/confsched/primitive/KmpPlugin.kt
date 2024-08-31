@@ -1,5 +1,6 @@
 package io.github.droidkaigi.confsched.primitive
 
+import com.google.devtools.ksp.gradle.KspTaskNative
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -17,9 +18,15 @@ class KmpPlugin : Plugin<Project> {
             tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
                 kotlinOptions.jvmTarget = "11"
             }
+
+            // https://github.com/DroidKaigi/conference-app-2024/issues/485#issuecomment-2304251937
             tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink>().configureEach {
                 notCompatibleWithConfigurationCache("Configuration chache not supported for a system property read at configuration time")
             }
+            tasks.withType<KspTaskNative>().configureEach {
+                notCompatibleWithConfigurationCache("Configuration chache not supported for a system property read at configuration time")
+            }
+
             kotlin {
                 with(sourceSets) {
                     commonMain {
